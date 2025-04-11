@@ -3,6 +3,7 @@ import { HomeIcon, BarChart3Icon, CalculatorIcon } from "lucide-react";
 
 import SignInPage from "@/features/auth/pages/sign-in";
 import InstrumentsPage from "@/features/instruments/pages/instruments";
+import StatisticsPage from "@/features/instruments/pages/statistics";
 import {
   DashboardLayout,
   type DashboardLayoutNavigation,
@@ -16,8 +17,8 @@ export function Router() {
       icon: HomeIcon,
     },
     {
-      name: "Gráfico",
-      href: "/grafico",
+      name: "Estadísticas",
+      href: "/statistics",
       icon: BarChart3Icon,
     },
     {
@@ -34,6 +35,7 @@ export function Router() {
 
         <Route element={<DashboardLayout navigation={navigation} />}>
           <Route index element={<InstrumentsPage />} />
+          <Route path="/statistics" element={<StatisticsPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
