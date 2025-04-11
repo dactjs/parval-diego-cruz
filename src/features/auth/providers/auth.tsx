@@ -27,7 +27,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
     if (!user) throw new Error("Credenciales inválidas");
 
-    sessionStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(user));
+    sessionStorage.setItem(
+      SESSION_STORAGE_KEY,
+      JSON.stringify({ username: user.username, role: user.role })
+    );
+
     setSession({ user });
   };
 

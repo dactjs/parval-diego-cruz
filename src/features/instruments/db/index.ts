@@ -1,6 +1,6 @@
 import type { Instrument, InstrumentHistory } from "../schemas/instruments";
 
-export const INSTRUMENTS: Instrument[] = [
+export const INSTRUMENTS: Omit<Instrument, "id">[] = [
   {
     issuer: "SEH",
     currency: "DOP",

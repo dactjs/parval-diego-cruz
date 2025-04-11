@@ -19,13 +19,14 @@ export function useInstruments(): UseInstrumentsReturn {
 
   useEffect(() => {
     startTransition(async () => {
-      await new Promise((resolve) => setTimeout(resolve, 3000));
+      await new Promise((resolve) => setTimeout(resolve, Math.random() * 3000));
 
-      const normalized = INSTRUMENTS.map((inst) => ({
-        ...inst,
-        issueDate: parseDate(inst.issueDate),
-        maturityDate: parseDate(inst.maturityDate),
-        lastOperationDate: parseDate(inst.lastOperationDate),
+      const normalized = INSTRUMENTS.map((instrument, index) => ({
+        ...instrument,
+        id: `${index}.${instrument.ticker}`,
+        issueDate: parseDate(instrument.issueDate),
+        maturityDate: parseDate(instrument.maturityDate),
+        lastOperationDate: parseDate(instrument.lastOperationDate),
       }));
 
       setInstruments(normalized);

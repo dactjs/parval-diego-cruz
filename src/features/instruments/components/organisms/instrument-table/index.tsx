@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { EditIcon, Trash2Icon, LineChartIcon } from "lucide-react";
 
+import { AuthContext } from "@/features/auth/context";
+import { UserRole } from "@/features/users/constants";
 import type { Instrument } from "@/features/instruments/schemas/instruments";
 import {
   Table,
@@ -19,6 +21,8 @@ export interface InstrumentTableProps {
 }
 
 export function InstrumentTable({ instruments }: InstrumentTableProps) {
+  const { session } = useContext(AuthContext);
+
   const [selectedTicker, setSelectedTicker] = useState<string | null>(null);
 
   const handleEdit = (index: number) => {
@@ -112,24 +116,28 @@ export function InstrumentTable({ instruments }: InstrumentTableProps) {
 
               <TableCell className="border border-gray-200 text-center">
                 <div className="flex justify-center space-x-2">
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    title="Editar"
-                    onClick={() => handleEdit(index)}
-                  >
-                    <EditIcon className="h-4 w-4" />
-                  </Button>
+                  {session?.user.role !== UserRole.CUSTOMER_SERVICE && (
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      title="Editar"
+                      onClick={() => handleEdit(index)}
+                    >
+                      <EditIcon className="h-4 w-4" />
+                    </Button>
+                  )}
 
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    title="Eliminar"
-                    className="text-red-500 hover:text-red-700"
-                    onClick={() => handleDelete(index)}
-                  >
-                    <Trash2Icon className="h-4 w-4" />
-                  </Button>
+                  {session?.user.role === UserRole.ADMIN && (
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      title="Eliminar"
+                      className="text-red-500 hover:text-red-700"
+                      onClick={() => handleDelete(index)}
+                    >
+                      <Trash2Icon className="h-4 w-4" />
+                    </Button>
+                  )}
 
                   <Button
                     variant="outline"

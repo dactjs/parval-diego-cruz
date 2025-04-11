@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router";
 import {
   Card,
@@ -12,8 +12,12 @@ import { Input } from "@/components/atoms/input";
 import { Label } from "@/components/atoms/label";
 import { Button } from "@/components/atoms/button";
 
+import { AuthContext } from "../../context";
+
 export function SignInPage() {
   const navigate = useNavigate();
+
+  const { signIn } = useContext(AuthContext);
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -28,8 +32,8 @@ export function SignInPage() {
     setError("");
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      navigate("/dashboard");
+      await signIn(username, password);
+      navigate("/");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Error al iniciar sesión");
     }

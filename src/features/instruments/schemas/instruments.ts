@@ -1,6 +1,7 @@
 import { z } from "@/lib/zod";
 
 export const InstrumentSchema = z.object({
+  id: z.string().uuid(),
   issuer: z.string().min(1),
   currency: z.string().min(1),
   issueDate: z.string().min(1),

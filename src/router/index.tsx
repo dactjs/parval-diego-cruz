@@ -4,6 +4,8 @@ import { HomeIcon, BarChart3Icon, CalculatorIcon } from "lucide-react";
 import SignInPage from "@/features/auth/pages/sign-in";
 import InstrumentsPage from "@/features/instruments/pages/instruments";
 import StatisticsPage from "@/features/instruments/pages/statistics";
+import SimulatorPage from "@/features/instruments/pages/simulator";
+import { ProtectedRoute } from "@/features/auth/components/protected-route";
 import {
   DashboardLayout,
   type DashboardLayoutNavigation,
@@ -23,7 +25,7 @@ export function Router() {
     },
     {
       name: "Simulador de Inversiones",
-      href: "/simulador",
+      href: "/simulator",
       icon: CalculatorIcon,
     },
   ];
@@ -33,9 +35,12 @@ export function Router() {
       <Routes>
         <Route path="/auth/sign-in" element={<SignInPage />} />
 
-        <Route element={<DashboardLayout navigation={navigation} />}>
-          <Route index element={<InstrumentsPage />} />
-          <Route path="/statistics" element={<StatisticsPage />} />
+        <Route element={<ProtectedRoute />}>
+          <Route element={<DashboardLayout navigation={navigation} />}>
+            <Route index element={<InstrumentsPage />} />
+            <Route path="/statistics" element={<StatisticsPage />} />
+            <Route path="/simulator" element={<SimulatorPage />} />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>
