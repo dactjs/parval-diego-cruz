@@ -1,7 +1,6 @@
 import { useState } from "react";
 
-import { UserSchema } from "@/features/users/schemas/users";
-import { USERS_STORAGE_KEY } from "@/features/users/constants";
+import { USERS } from "@/features/users/db/seed";
 
 import { AuthContext } from "../context";
 import { SessionSchema, type Session } from "../schemas/session";
@@ -22,14 +21,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   });
 
   const handleSignIn = async (username: string, password: string) => {
-    const raw = localStorage.getItem(USERS_STORAGE_KEY);
-    const parsed = raw ? JSON.parse(raw) : [];
-
-    const result = UserSchema.array().safeParse(parsed);
-
-    if (!result.success) throw new Error(result.error.message);
-
-    const user = result.data.find(
+    const user = USERS.find(
       (user) => username === user.username && password === user.password
     );
 

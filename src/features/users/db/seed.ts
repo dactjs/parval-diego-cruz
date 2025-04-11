@@ -1,7 +1,7 @@
 import type { User } from "../schemas/users";
 import { UserRole } from "../constants";
 
-export const DEFAULT_USERS: User[] = [
+export const USERS: User[] = [
   {
     username: "admin",
     password: "admin123",
