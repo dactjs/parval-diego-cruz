@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { USERS } from "@/features/users/db/seed";
+import { USERS } from "@/features/users/db";
 
 import { AuthContext } from "../context";
 import { SessionSchema, type Session } from "../schemas/session";

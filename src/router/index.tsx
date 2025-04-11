@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router";
 import { HomeIcon, BarChart3Icon, CalculatorIcon } from "lucide-react";
 
 import SignInPage from "@/features/auth/pages/sign-in";
+import InstrumentsPage from "@/features/instruments/pages/instruments";
 import {
   DashboardLayout,
   type DashboardLayoutNavigation,
@@ -32,7 +33,7 @@ export function Router() {
         <Route path="/auth/sign-in" element={<SignInPage />} />
 
         <Route element={<DashboardLayout navigation={navigation} />}>
-          <Route index element={<h1>Hola</h1>} />
+          <Route index element={<InstrumentsPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
